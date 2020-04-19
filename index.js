@@ -8,7 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import { store, persistor } from './src/store/configureStore';
 
-import App from './src/App';
+import App from './src/containers/App';
 
 export default class ScoreboardApp extends Component {
     constructor(props) {

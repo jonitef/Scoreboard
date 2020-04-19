@@ -13,3 +13,10 @@ export function deleteScore(index) {
         payload: index
     }
 }
+
+export function filterScore(searchString) {
+    return {
+        type: ActionTypes.FILTER_SCORE,
+        payload: searchString
+    }
+}
