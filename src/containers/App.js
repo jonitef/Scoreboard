@@ -40,6 +40,12 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.range.max === null) {
+        this.props.changeRange({min: this.props.range.min, max: Number.POSITIVE_INFINITY})
+    }
+}
+
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible })
   }
@@ -56,8 +62,6 @@ class App extends Component {
   }
 
   render() {
-
-    console.log('this.props: ',this.props)
     
     return (
       <SafeAreaView style={styles.appContainer}>

@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
         width: width * 0.9,
         height: 30,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginLeft: -5
     },
     sortByButton: {
         marginHorizontal: 40,

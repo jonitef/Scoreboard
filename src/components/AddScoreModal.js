@@ -10,6 +10,7 @@ import uuid from 'react-native-uuid';
 
 import styles from './Style';
 import InputField from './InputField';
+import GeneralBTN from './GeneralBTN';
 
 import * as scoreActions from '../actions/scoreAction';
 import * as sortAction from '../actions/sortAction';
@@ -69,29 +70,22 @@ class AddScoreModal extends Component {
                 <View style={styles.container}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>ADD NEW SCORE!</Text>
-                        <InputField style={{marginTop: 20}} placeholder={'Name'} onChangeText={this.setName} />
-                        <InputField style={{marginTop: 20}} placeholder={'Score'} onChangeText={this.setScore} />
+                        <InputField value={''} style={{ marginTop: 20 }} placeholder={'Name'} onChangeText={this.setName} type={'default'} />
+                        <InputField value={''} style={{ marginTop: 20 }} placeholder={'Score'} onChangeText={this.setScore} type={'numeric'}/>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => {
-                                    this.setState({ validNameScore: false, name: '', score: '' })
-                                    this.props.toggleVisibility()
-                                }}
-                            >
-                                <Text style={styles.textStyleCancel}>Cancel</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.button}
+                            <GeneralBTN style={styles.textStyleCancel} title={'Cancel'} disabled={false} onPress={() => {
+                                this.setState({ validNameScore: false, name: '', score: '' })
+                                this.props.toggleVisibility()
+                            }} />
+                            <GeneralBTN
+                                style={{ ...styles.textStyleAdd, opacity: this.state.validNameScore ? 1 : 0.6 }}
+                                title={'ADD'}
                                 disabled={!this.state.validNameScore}
                                 onPress={() => {
                                     this.addScore()
                                     this.setState({ validNameScore: false, name: '', score: '' })
                                     this.props.toggleVisibility()
-                                }}
-                            >
-                                <Text style={{ ...styles.textStyleAdd, opacity: this.state.validNameScore ? 1 : 0.6 }}>ADD</Text>
-                            </TouchableOpacity>
+                                }} />
                         </View>
                     </View>
                 </View>

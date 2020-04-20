@@ -14,6 +14,8 @@ import styles from './Style';
 export const { height, width } = Dimensions.get('window');
 
 import InputField from './InputField';
+import HighLowBTN from './HighLowBTN';
+import GeneralBTN from './GeneralBTN';
 
 import * as scoreActions from '../actions/scoreAction';
 import * as sortAction from '../actions/sortAction';
@@ -37,16 +39,18 @@ class FiltersModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            highToLow: this.props.sortBy,
-            visible: false
+            order: this.props.sortBy,
+            visible: false,
+            disableApply: false,
+            min: this.props.range.min,
+            max: this.props.range.max
         };
     }
 
     render() {
-        return (
-            <View style={{
 
-            }}>
+        return (
+            <View style={{}}>
                 <TouchableOpacity onPress={() => this.setState({ visible: true })} style={styles.sortButton}>
                     <MaterialIcons name='sort' size={25} color='black' style={{}} />
                     <Text>Sort</Text>
@@ -60,55 +64,29 @@ class FiltersModal extends Component {
                             <Text>SORT SCORES</Text>
                             <View style={{ width: width * 0.8 }}>
                                 <View style={styles.rangeContainer}>
-                                    <InputField style={{ width: 100 }} placeholder={'min'} onChangeText={(input) => this.setState({ min: input })} />
+                                    <InputField value={this.state.min} style={{ width: 100 }} placeholder={'min'} onChangeText={(input) => this.setState({ min: input })} type={'numeric'} />
                                     <Text>-</Text>
-                                    <InputField style={{ width: 100 }} placeholder={'max'} onChangeText={(input) => this.setState({ max: input })} />
+                                    <InputField value={this.state.max === null ? '' : this.state.max} style={{ width: 100 }} placeholder={'max'} onChangeText={(input) => this.setState({ max: input })} type={'numeric'} />
                                 </View>
                             </View>
                             <View style={{}}>
-                                <TouchableOpacity
-                                    style={{ width: width * 0.8 }}
-                                    onPress={() => this.setState({ highToLow: 'desc' })}
-                                >
-                                    <View style={styles.sortByButton}>
-                                        <Text style={{}}>High to low</Text>
-                                        <MaterialIcons name='check' size={19} color={this.state.highToLow === 'desc' ? 'black' : 'white'} style={{}} />
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={{ width: width * 0.8 }}
-                                    onPress={() => this.setState({ highToLow: 'asc' })}
-                                >
-                                    <View style={styles.sortByButton}>
-                                        <Text style={{}}>Low to high</Text>
-                                        <MaterialIcons name='check' size={19} color={this.state.highToLow === 'asc' ? 'black' : 'white'} style={{}} />
-                                    </View>
-                                </TouchableOpacity>
+                                <HighLowBTN title={'High to low'} onPress={() => this.setState({ order: 'desc' })} selected={this.state.order === 'desc' ? true : false} />
+                                <HighLowBTN title={'Low to high'} onPress={() => this.setState({ order: 'asc' })} selected={this.state.order === 'asc' ? true : false} />
                             </View>
                             <View style={styles.buttonContainer}>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => {
-                                        this.setState({ highToLow: this.props.sortBy, min: '', max: '', visible: false })
-                                    }}
-                                >
-                                    <Text style={styles.textStyleCancel}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => {
-                                        this.props.changeSortBy(this.state.highToLow)
-                                        this.props.changeRange({ min: this.state.min, max: this.state.max })
-                                        this.setState({ min: '', max: '', visible: false })
-                                    }}
-                                >
-                                    <Text style={styles.textStyleAdd}>APPLY</Text>
-                                </TouchableOpacity>
+                                <GeneralBTN style={styles.textStyleCancel} title={'Cancel'} disabled={false} onPress={() => {
+                                    this.setState({ order: this.props.sortBy, visible: false })
+                                }} />
+                                <GeneralBTN style={{ ...styles.textStyleAdd, opacity: !this.state.disableApply ? 1 : 0.6 }} title={'APPLY'} disabled={this.state.disableApply} onPress={() => {
+                                    this.props.changeSortBy(this.state.order)
+                                    this.props.changeRange({ min: this.state.min, max: this.state.max })
+                                    this.setState({ visible: false })
+                                }} />
                             </View>
                         </View>
                     </View>
                 </Modal>
-            </View>
+            </View >
         );
     }
 }

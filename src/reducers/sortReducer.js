@@ -16,33 +16,12 @@ export default function sortReducer(state = initialState, action) {
                 sortBy: action.payload
             }
         case ActionTypes.CHANGE_RANGE:
-            console.log('change range: ', action.payload)
-            if (action.payload.max === null || action.payload.max === undefined || action.payload.max === '') {
-                if (action.payload.min === null || action.payload.min === undefined || action.payload.min === '') {
-                    return {
-                        ...state,
-                        range: {
-                            min: 0,
-                            max: Number.POSITIVE_INFINITY
-                        }
-                    }
-                }
-                else {
-                    return {
-                        ...state,
-                        range: {
-                            min: Number(action.payload.min),
-                            max: Number.POSITIVE_INFINITY
-                        }
-                    }
-                }
-            }
-            else if (action.payload.min === null || action.payload.min === undefined || action.payload.min === '') {
+            if (action.payload.max === '' || action.payload.max === null) {
                 return {
                     ...state,
                     range: {
-                        min: 0,
-                        max: Number(action.payload.max)
+                        min: Number(action.payload.min),
+                        max: Number.POSITIVE_INFINITY
                     }
                 }
             }

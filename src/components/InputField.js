@@ -14,7 +14,7 @@ export default class InputField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            value: this.props.value,
         };
     }
 
@@ -24,8 +24,9 @@ export default class InputField extends Component {
     }
 
     render() {
+
         return (
-            <View style={{...styles.inputFieldContainer, ...this.props.style}}>
+            <View style={{ ...styles.inputFieldContainer, ...this.props.style }}>
                 <TextInput
                     style={styles.inputField}
                     placeholderTextColor={'white'}
@@ -34,6 +35,7 @@ export default class InputField extends Component {
                     }}
                     value={String(this.state.value)}
                     placeholder={this.props.placeholder}
+                    keyboardType={this.props.type}
                 />
             </View>
         );
