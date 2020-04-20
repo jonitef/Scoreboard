@@ -22,14 +22,9 @@ export default class HighLowBTN extends Component {
     render() {
 
         return (
-            <TouchableOpacity
-                style={{ width: width * 0.8 }}
-                onPress={this.props.onPress}
-            >
-                <View style={styles.sortByButton}>
-                    <Text style={{}}>{this.props.title}</Text>
-                    <MaterialIcons name='check' size={19} color={this.props.selected ? 'black' : 'white'} />
-                </View>
+            <TouchableOpacity onPress={this.props.onPress} style={styles.sortByButton}>
+                <Text style={{}}>{this.props.title}</Text>
+                <MaterialIcons name='check' size={19} color={this.props.selected ? 'black' : 'white'} />
             </TouchableOpacity>
         );
     }

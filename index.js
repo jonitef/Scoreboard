@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Dimensions, View } from 'react-native';
+import { AppRegistry, Dimensions, SafeAreaView } from 'react-native';
 import { name as appName } from './app.json';
 export const { height, width } = Dimensions.get("window");
 
@@ -20,13 +20,13 @@ export default class ScoreboardApp extends Component {
 
     render() {
         return (
-            <View style={{ width: width, height: height, justifyContent: 'center', alignItems: 'center' }}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <PersistGate loading={null} persistor={persistor}>
                     <Provider store={store}>
                         <App />
                     </Provider>
                 </PersistGate>
-            </View>
+            </SafeAreaView>
         );
     }
 }

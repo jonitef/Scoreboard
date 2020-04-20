@@ -4,10 +4,8 @@ export const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     appContainer: {
-        width: width,
-        height: height,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        flex: 1,
+        alignItems: 'center'
     },
 });
 

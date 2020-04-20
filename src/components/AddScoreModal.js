@@ -69,7 +69,7 @@ class AddScoreModal extends Component {
             >
                 <View style={styles.container}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>ADD NEW SCORE!</Text>
+                        <Text style={styles.modalText}>ADD NEW SCORE</Text>
                         <InputField value={''} style={{ marginTop: 20 }} placeholder={'Name'} onChangeText={this.setName} type={'default'} />
                         <InputField value={''} style={{ marginTop: 20 }} placeholder={'Score'} onChangeText={this.setScore} type={'numeric'}/>
                         <View style={styles.buttonContainer}>

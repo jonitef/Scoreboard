@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
+  View,
   Dimensions,
 } from 'react-native';
 
@@ -13,7 +13,7 @@ import * as sortAction from '../actions/sortAction';
 import styles from './Style';
 
 import SearchBar from '../components/SearchBar';
-import FilterBar from '../components/FiltersModal';
+import FiltersModal from '../components/FiltersModal';
 import ScoreboardList from '../components/ScoreboardList';
 import AddScoreButton from '../components/AddScoreButton';
 import AddScoreModal from '../components/AddScoreModal';
@@ -64,13 +64,13 @@ class App extends Component {
   render() {
     
     return (
-      <SafeAreaView style={styles.appContainer}>
+      <View style={styles.appContainer}>
         <AddScoreModal toggleVisibility={this.toggleModal} visible={this.state.isModalVisible} />
         <SearchBar />
-        <FilterBar />
+        <FiltersModal />
         <ScoreboardList data={this.sortedData()} />
         <AddScoreButton openModal={this.toggleModal} />
-      </SafeAreaView>
+      </View>
     );
   }
 }

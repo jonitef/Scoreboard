@@ -22,7 +22,7 @@ export default class ScoreboardList extends Component {
     render() {
         return (
             <FlatList
-                style={{ width: width * 0.9 }}
+                style={{ width: '90%' }}
                 data={this.props.data}
                 renderItem={({ item, index }) => <ScoreboardListItem item={item} index={index} />}
                 keyExtractor={item => item.id}

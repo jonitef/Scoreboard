@@ -41,19 +41,18 @@ class FiltersModal extends Component {
         this.state = {
             order: this.props.sortBy,
             visible: false,
-            disableApply: false,
-            min: this.props.range.min,
-            max: this.props.range.max
+            min: this.props.range.min === 0 ? '' : this.props.range.min,
+            max: this.props.range.max === Infinity ? '' : this.props.range.max
         };
     }
 
     render() {
 
         return (
-            <View style={{}}>
+            <View style={styles.sortButtonContainer}>
                 <TouchableOpacity onPress={() => this.setState({ visible: true })} style={styles.sortButton}>
-                    <MaterialIcons name='sort' size={25} color='black' style={{}} />
-                    <Text>Sort</Text>
+                    <MaterialIcons name='sort' size={30} color='black' />
+                    <Text style={{ marginLeft: 8, fontSize: 16 }}>Sort</Text>
                 </TouchableOpacity>
                 <Modal
                     animationType='slide'
@@ -61,15 +60,13 @@ class FiltersModal extends Component {
                     visible={this.state.visible}>
                     <View style={styles.container}>
                         <View style={styles.modalView}>
-                            <Text>SORT SCORES</Text>
-                            <View style={{ width: width * 0.8 }}>
-                                <View style={styles.rangeContainer}>
-                                    <InputField value={this.state.min} style={{ width: 100 }} placeholder={'min'} onChangeText={(input) => this.setState({ min: input })} type={'numeric'} />
-                                    <Text>-</Text>
-                                    <InputField value={this.state.max === null ? '' : this.state.max} style={{ width: 100 }} placeholder={'max'} onChangeText={(input) => this.setState({ max: input })} type={'numeric'} />
-                                </View>
+                            <Text style={styles.modalText}>SORT SCORES</Text>
+                            <View style={styles.rangeContainer}>
+                                <InputField value={this.state.min} style={{ width: 100 }} placeholder={'min'} onChangeText={(input) => this.setState({ min: input })} type={'numeric'} />
+                                <Text>-</Text>
+                                <InputField value={this.state.max === null ? '' : this.state.max} style={{ width: 100 }} placeholder={'max'} onChangeText={(input) => this.setState({ max: input })} type={'numeric'} />
                             </View>
-                            <View style={{}}>
+                            <View style={{width: '100%'}}>
                                 <HighLowBTN title={'High to low'} onPress={() => this.setState({ order: 'desc' })} selected={this.state.order === 'desc' ? true : false} />
                                 <HighLowBTN title={'Low to high'} onPress={() => this.setState({ order: 'asc' })} selected={this.state.order === 'asc' ? true : false} />
                             </View>
@@ -77,7 +74,7 @@ class FiltersModal extends Component {
                                 <GeneralBTN style={styles.textStyleCancel} title={'Cancel'} disabled={false} onPress={() => {
                                     this.setState({ order: this.props.sortBy, visible: false })
                                 }} />
-                                <GeneralBTN style={{ ...styles.textStyleAdd, opacity: !this.state.disableApply ? 1 : 0.6 }} title={'APPLY'} disabled={this.state.disableApply} onPress={() => {
+                                <GeneralBTN style={styles.textStyleAdd} title={'APPLY'} disabled={false} onPress={() => {
                                     this.props.changeSortBy(this.state.order)
                                     this.props.changeRange({ min: this.state.min, max: this.state.max })
                                     this.setState({ visible: false })

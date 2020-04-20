@@ -38,20 +38,17 @@ class ScoreboardListItem extends Component {
 
     render() {
         return (
-            <View style={{
-                width: width,
-                height: 50,
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                flexDirection: 'row',
-            }}>
-                <Text style={{ marginRight: 20 }}>{this.props.item.name}</Text>
-                <Text style={{ marginRight: 20 }}>{this.props.item.score}</Text>
-                <TouchableOpacity style={{ marginHorizontal: 20 }} onPress={() => {
-                    this.props.deleteScore(this.props.item.id)
-                }}>
-                    <Text>X</Text>
-                </TouchableOpacity>
+            <View>
+                <View style={styles.scoreBoardItemContainer}>
+                    <Text style={{ flex: 1, textAlign: 'left', fontSize: 16 }}>{this.props.item.name}</Text>
+                    <Text style={{ flex: 1, textAlign: 'center', fontSize: 16 }}>{this.props.item.score}</Text>
+                    <TouchableOpacity style={{ flex: 1, alignItems: 'center', borderWidth: 1, borderColor: 'red' }} onPress={() => {
+                        this.props.deleteScore(this.props.item.id)
+                    }}>
+                        <Text>DELETE</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ width: '100%', height: 1, backgroundColor: 'black' }} />
             </View>
         )
     }
